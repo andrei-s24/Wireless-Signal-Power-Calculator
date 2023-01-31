@@ -30,12 +30,13 @@ function App() {
         <Col>
           <Form onSubmit={e => {
             e.preventDefault();
-            let data = new FormData();
+            let data = new FormData(e.target);
             // add form input from hidden input elsewhere on the page
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             fetch("", {
               method: 'POST',
               body: data,
-              headers: { "X-CSRFToken": '{{csrf_token}}' }
+              headers: { "X-CSRFToken": csrftoken }
             })
           }}>
             {/* CSRF Token not working */}
@@ -47,7 +48,7 @@ function App() {
                 Power
               </Form.Label>
               <Col sm={6}>
-                <Form.Control type="number" placeholder="Power" />
+                <Form.Control type="number" placeholder="Power" name="power" />
               </Col>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="gain">
