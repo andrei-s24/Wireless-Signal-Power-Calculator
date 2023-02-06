@@ -7,22 +7,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function getCookie(name) {
-  var cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-    var cookies = document.cookie.split(';');
-    for (var i = 0; i < cookies.length; i++) {
-      var cookie = cookies[i].trim();
-      // Does this cookie string begin with the name we want?
-      if (cookie.substring(0, name.length + 1) === (name + '=')) {
-        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-        break;
-      }
-    }
-  }
-  return cookieValue;
-}
-
 function App() {
   return (
     <div className="App">
@@ -43,46 +27,54 @@ function App() {
             <h1> Inputs </h1>
             <br />
             <h2> Transmitter </h2>
-            <Form.Group as={Row} className="mb-3" controlId="power">
+            <Form.Group as={Row} className="mb-3" controlId="transmitter_power">
               <Form.Label column sm={6}>
                 Power
               </Form.Label>
               <Col sm={6}>
-                <Form.Control type="number" placeholder="Power" name="power" />
+                <Form.Control type="number" placeholder="Power" name="transmitter_power" />
               </Col>
             </Form.Group>
-            <Form.Group as={Row} className="mb-3" controlId="gain">
+            <Form.Group as={Row} className="mb-3" controlId="transmitter_gain">
               <Form.Label column sm={6}>
                 Gain
               </Form.Label>
               <Col sm={6}>
-                <Form.Control type="number" placeholder="Gain" />
+                <Form.Control type="number" placeholder="Gain" name="transmitter_gain" />
               </Col>
             </Form.Group>
-            <Form.Group as={Row} className="mb-3" controlId="distance">
+            <Form.Group as={Row} className="mb-3" controlId="main_distance">
               <Form.Label column sm={6}>
                 Distance to Receiver
               </Form.Label>
               <Col sm={6}>
-                <Form.Control type="number" placeholder="Distance" />
+                <Form.Control type="number" placeholder="Distance" name="main_distance" />
               </Col>
             </Form.Group>
             <br />
             <h2> Receiver </h2>
-            <Form.Group as={Row} className="mb-3" controlId="gain">
+            <Form.Group as={Row} className="mb-3" controlId="receiver_power">
               <Form.Label column sm={6}>
                 Power
               </Form.Label>
               <Col sm={6}>
-                <Form.Control type="number" placeholder="Gain" />
+                <Form.Control type="number" placeholder="Power" name="receiver_power" />
               </Col>
             </Form.Group>
-            <Form.Group as={Row} className="mb-3" controlId="distance">
+            <Form.Group as={Row} className="mb-3" controlId="receiver_gain">
               <Form.Label column sm={6}>
                 Gain
               </Form.Label>
               <Col sm={6}>
-                <Form.Control type="number" placeholder="Distance" />
+                <Form.Control type="number" placeholder="Gain" name="receiver_gain" />
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="frequency">
+              <Form.Label column sm={6}>
+                Frequency
+              </Form.Label>
+              <Col sm={6}>
+                <Form.Control type="number" placeholder="Frequency" name="frequency" />
               </Col>
             </Form.Group>
             <h2> Interferers </h2>
