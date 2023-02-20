@@ -15,9 +15,16 @@ function App() {
           <Form onSubmit={e => {
             e.preventDefault();
             let data = new FormData(e.target);
-            // add form input from hidden input elsewhere on the page
+            let dataEntries = data.entries();
+            dataEntries.next();
+            let URL = "calc_api/calc?";
+            for (const pair of dataEntries) {
+              let key = pair[0]
+              let value = pair[1]
+              URL += key + "=" + value + "&";
+          }
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-            fetch("calc_api/calc/", {
+            fetch(URL, {
               method: 'GET',
               headers: { "X-CSRFToken": csrftoken }
             }).then(response => response.json())
@@ -58,14 +65,6 @@ function App() {
             </Form.Group>
             <br />
             <h2> Receiver </h2>
-            <Form.Group as={Row} className="mb-3" controlId="receiver_power">
-              <Form.Label column sm={6}>
-                Power
-              </Form.Label>
-              <Col sm={6}>
-                <Form.Control type="number" placeholder="Power" name="receiver_power" />
-              </Col>
-            </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="receiver_gain">
               <Form.Label column sm={6}>
                 Gain
