@@ -16,8 +16,9 @@ function App() {
             e.preventDefault();
             let data = new FormData(e.target);
             let dataEntries = data.entries();
-            dataEntries.next();
             let URL = "calc_api/calc?";
+            let transmitterName = "dipole"
+            let transmitterURL = "calc_api/get?name=" + antennaName;
             for (const pair of dataEntries) {
               let key = pair[0]
               let value = pair[1]
@@ -34,6 +35,7 @@ function App() {
               .catch((error) => {
                 console.error('Error:', error)
               });
+            // fetch(transmitter)
           }}>
             {/* CSRF Token not working */}
             <h1> Inputs </h1>
@@ -78,7 +80,7 @@ function App() {
                 Frequency
               </Form.Label>
               <Col sm={6}>
-                <Form.Control type="number" placeholder="Frequency" name="frequency" />
+                <Form.Control type="number" step="any" placeholder="Frequency" name="frequency" />
               </Col>
             </Form.Group>
             <h2> Interferers </h2>
