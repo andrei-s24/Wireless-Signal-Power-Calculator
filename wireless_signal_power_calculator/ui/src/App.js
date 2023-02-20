@@ -17,11 +17,16 @@ function App() {
             let data = new FormData(e.target);
             // add form input from hidden input elsewhere on the page
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-            fetch("", {
-              method: 'POST',
-              body: data,
+            fetch("calc_api/calc/", {
+              method: 'GET',
               headers: { "X-CSRFToken": csrftoken }
-            })
+            }).then(response => response.json())
+              .then(data => {
+
+              })
+              .catch((error) => {
+                console.error('Error:', error)
+              });
           }}>
             {/* CSRF Token not working */}
             <h1> Inputs </h1>
