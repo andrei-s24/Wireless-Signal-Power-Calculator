@@ -1,4 +1,4 @@
-from ..wireless_signal_power_calculator.antenna_utils.antenna_calculations import friis_transmission_formula
+from .utils.antenna_calculations import friis_transmission_formula
 from django.test import TestCase
 
 class FriisTransmissionTests(TestCase):
