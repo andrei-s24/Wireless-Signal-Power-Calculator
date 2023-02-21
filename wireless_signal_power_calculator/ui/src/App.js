@@ -17,8 +17,6 @@ function App() {
             let data = new FormData(e.target);
             let dataEntries = data.entries();
             let URL = "calc_api/calc?";
-            let transmitterName = "dipole"
-            let transmitterURL = "calc_api/get?name=" + antennaName;
             for (const pair of dataEntries) {
               let key = pair[0]
               let value = pair[1]
@@ -35,12 +33,19 @@ function App() {
               .catch((error) => {
                 console.error('Error:', error)
               });
-            // fetch(transmitter)
           }}>
             {/* CSRF Token not working */}
             <h1> Inputs </h1>
             <br />
             <h2> Transmitter </h2>
+            <Form.Group as={Row} className="mb-3" controlId="transmitting_antenna">
+              <Form.Label column sm={6}>
+                Antenna
+              </Form.Label>
+              <Col sm={6}>
+                <AntennaSelect/>
+              </Col>
+            </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="transmitter_power">
               <Form.Label column sm={6}>
                 Power
@@ -116,6 +121,21 @@ function App() {
       </Row>
     </div>
   );
+}
+
+function AntennaSelect(props) {
+  const antennaNames = JSON.parse(window.antennaNames.replace(/&quot;/g, '"'));
+  const options = [];
+  for (let i = 0; i < antennaNames.length; i++) {
+      let packName = antennaNames[i]
+      options.push(<option value={packName}>{packName}</option>)
+  }
+
+  return (
+      <Form.Control as="select" name={props.name}>
+          {options}
+      </Form.Control>
+  )
 }
 
 export default App;
