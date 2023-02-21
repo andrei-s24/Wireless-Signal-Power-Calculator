@@ -6,6 +6,6 @@ from json import dumps
 
 @csrf_protect
 def index(request):
-    antenna_names = [antenna_names for antenna in Antenna.objects.all()]
+    antenna_names = [antenna.name for antenna in Antenna.objects.all()]
     antenna_names.sort()
     return render(request, "index.html", {'antenna_names': dumps(antenna_names)})

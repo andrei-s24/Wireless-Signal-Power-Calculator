@@ -1,4 +1,4 @@
-from .utils.antenna_calculations import friis_transmission_formula
+from .utils.antenna_calculations import friis_transmission_formula, friis_transmission_formula_per_channel
 from django.test import TestCase
 
 class FriisTransmissionTests(TestCase):

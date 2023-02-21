@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'calc_api',
-    'django_better_admin_arrayfield',
 ]
 
 MIDDLEWARE = [
