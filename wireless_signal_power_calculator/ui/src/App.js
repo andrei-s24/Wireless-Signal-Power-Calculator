@@ -29,7 +29,7 @@ function App() {
                 headers: { "X-CSRFToken": csrftoken }
               }).then(response => response.json())
                 .then(data => {
-
+                  console.log(data);
                 })
                 .catch((error) => {
                   console.error('Error:', error)
@@ -44,7 +44,7 @@ function App() {
                   Antenna
                 </Form.Label>
                 <Col xs={6}>
-                  <AntennaSelect />
+                  <AntennaSelect name="transmitter" />
                 </Col>
               </Form.Group>
               <Form.Group as={Row} className="mb-3" controlId="transmitter_power">
@@ -70,11 +70,11 @@ function App() {
                   Antenna
                 </Form.Label>
                 <Col xs={6}>
-                  <AntennaSelect />
+                  <AntennaSelect name="receiver" />
                 </Col>
               </Form.Group>
               <h2> Interferers </h2>
-
+              <Button type="submit">Submit</Button>
             </Form>
           </Col>
           <Col xs={6}>
