@@ -6,10 +6,21 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Graph from './Graph.js';
+import { useState, useEffect } from "react";
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
 
 function App() {
+  const [data, setData] = useState({});
   return (
     <div className="App">
+      <Navbar bg="light" expand="lg">
+          <Navbar.Brand href="#home">RF Calculator</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      </Navbar>
       <Container fluid>
         <Row>
           <Col>
@@ -29,7 +40,7 @@ function App() {
                 headers: { "X-CSRFToken": csrftoken }
               }).then(response => response.json())
                 .then(data => {
-                  console.log(data);
+                  setData(data["array"]);
                 })
                 .catch((error) => {
                   console.error('Error:', error)
@@ -79,6 +90,7 @@ function App() {
           </Col>
           <Col xs={6}>
             <h1> Graph </h1>
+            <Graph data={data} />
           </Col>
           <Col>
             <h1> Outputs </h1>

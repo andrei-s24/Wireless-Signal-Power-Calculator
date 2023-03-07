@@ -8,7 +8,7 @@ def friis_transmission_formula(transmitter_power, transmitter_gain, receiver_gai
 def friis_transmission_formula_per_channel(transmitter_power: float, transmitter: Antenna, receiver: Antenna, distance: float):
     transmitter_profile = transmitter.profile
     receiver_profile = receiver.profile
-    receiver_power = []
+    receiver_power = dict()
     for key, value in receiver_profile.items():
         receiver_frequency = float(key)
         if key in transmitter_profile.keys():
@@ -24,7 +24,7 @@ def friis_transmission_formula_per_channel(transmitter_power: float, transmitter
                     transmitter_gain = (lower_bound_gain + value) / 2
                 else: 
                     transmitter_gain = value
-        receiver_power.append(friis_transmission_formula(transmitter_power, transmitter_gain, value, receiver_frequency, distance))
+        receiver_power[key] = friis_transmission_formula(transmitter_power, transmitter_gain, value, receiver_frequency*10**-9, distance)
     return receiver_power
         
 
