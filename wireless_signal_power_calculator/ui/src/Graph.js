@@ -28,11 +28,11 @@ function Graph(props) {
         responsive: true,
         plugins: {
             legend: {
+                display: false,
                 position: 'top',
             },
             title: {
-                display: true,
-                text: 'Chart.js Line Chart',
+                display: false
             },
         },
     };

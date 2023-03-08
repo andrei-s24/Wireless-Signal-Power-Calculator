@@ -24,6 +24,11 @@
   color: white;
 }
 
+.navbar {
+  background-color: #7F00FF;
+  color: white;
+}
+
 .App-link {
   color: #61dafb;
 }
