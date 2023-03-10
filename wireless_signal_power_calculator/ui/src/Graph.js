@@ -34,6 +34,18 @@ function Graph(props) {
             title: {
                 display: false
             },
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems, data) {
+                    return '';
+                    },
+                    label: function(tooltipItem, data) {
+                    var datasetLabel = '';
+                    var label = data.labels[tooltipItem.index];
+                    return data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                    }
+                }
+            }
         },
     };
     var labels = []

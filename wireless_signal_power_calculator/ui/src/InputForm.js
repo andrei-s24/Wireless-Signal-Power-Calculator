@@ -43,16 +43,22 @@ function InputForm(props) {
                 <Form.Label column xs={6}>
                     Power
                 </Form.Label>
-                <Col xs={6}>
-                    <Form.Control type="number" placeholder="Power" name="transmitter_power" />
+                <Col xs={5}>
+                    <Form.Control column xs={6} type="number" placeholder="Power" name="transmitter_power" />
+                </Col>
+                <Col xs={1} className="p-1">
+                    <span>W</span>
                 </Col>
             </Form.Group>
             <Form.Group as={Row} className="mb-3" controlId="main_distance">
                 <Form.Label column xs={6}>
                     Distance to Receiver
                 </Form.Label>
-                <Col xs={6}>
+                <Col xs={5}>
                     <Form.Control type="number" placeholder="Distance" name="main_distance" />
+                </Col>
+                <Col xs={1} className="p-1">
+                    <span>m</span>
                 </Col>
             </Form.Group>
             <br />
@@ -66,7 +72,7 @@ function InputForm(props) {
                 </Col>
             </Form.Group>
             <h2> Interferers </h2>
-            <Button type="submit">Submit</Button>
+            <Button type="submit" className="custom-btn">Submit</Button>
         </Form>
     )
 }

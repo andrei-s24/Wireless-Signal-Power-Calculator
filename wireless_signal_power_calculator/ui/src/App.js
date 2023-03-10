@@ -18,7 +18,7 @@ function App() {
         <Navbar.Brand href="#home">RF Calculator</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
       </Navbar>
-      <Container fluid>
+      <Container fluid className="mt-3">
         <Row>
           <Col>
             <InputForm setData={setData} />
