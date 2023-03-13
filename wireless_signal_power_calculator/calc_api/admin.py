@@ -1,9 +1,8 @@
 from django import forms
 from django.contrib import admin
 from .models import Antenna
+from .utils.parse import parse_profile
 
-# Register your models here.
-admin.site.register(Antenna)
 
 # Will use this form later
 class AntennaForm(forms.ModelForm):
@@ -21,6 +20,6 @@ class AntennaForm(forms.ModelForm):
                 data['profile'] = parse_profile(data['profile'])
         super(AntennaForm, self).__init__(*args, **kwargs)
 
-# @admin.register(Antenna)
-# class AntennaAdmin(admin.ModelAdmin):
-#     form = PackForm
+@admin.register(Antenna)
+class AntennaAdmin(admin.ModelAdmin):
+    form = AntennaForm

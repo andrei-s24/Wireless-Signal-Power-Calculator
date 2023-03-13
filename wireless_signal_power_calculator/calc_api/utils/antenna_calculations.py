@@ -3,7 +3,7 @@ from calc_api.models import Antenna
 
 def friis_transmission_formula(transmitter_power, transmitter_gain, receiver_gain, frequency, distance):
     speed_of_light = 2e8
-    return transmitter_power * transmitter_gain * receiver_gain * speed_of_light / (4 * math.pi * 2 * frequency)**2
+    return transmitter_power * transmitter_gain * receiver_gain * speed_of_light / (4 * math.pi * 2 * distance * frequency)**2
 
 def friis_transmission_formula_per_channel(transmitter_power: float, transmitter: Antenna, receiver: Antenna, distance: float):
     transmitter_profile = transmitter.profile
@@ -24,7 +24,7 @@ def friis_transmission_formula_per_channel(transmitter_power: float, transmitter
                     transmitter_gain = (lower_bound_gain + value) / 2
                 else: 
                     transmitter_gain = value
-        receiver_power[key] = friis_transmission_formula(transmitter_power, transmitter_gain, value, receiver_frequency*10**-9, distance)
+        receiver_power[key] = friis_transmission_formula(transmitter_power, transmitter_gain, value, receiver_frequency*10**-6, distance)
     return receiver_power
         
 

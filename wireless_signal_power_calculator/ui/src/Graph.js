@@ -34,18 +34,7 @@ function Graph(props) {
             title: {
                 display: false
             },
-            tooltip: {
-                callbacks: {
-                    title: function(tooltipItems, data) {
-                    return '';
-                    },
-                    label: function(tooltipItem, data) {
-                    var datasetLabel = '';
-                    var label = data.labels[tooltipItem.index];
-                    return data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                    }
-                }
-            }
+            
         },
     };
     var labels = []
@@ -59,7 +48,7 @@ function Graph(props) {
         labels,
         datasets: [
             {
-                label: 'Dataset 1',
+                label: 'Power',
                 data: calcData,
                 borderColor: 'rgb(127, 0, 255)',
                 backgroundColor: 'rgba(127, 0, 255, 0.5)',
