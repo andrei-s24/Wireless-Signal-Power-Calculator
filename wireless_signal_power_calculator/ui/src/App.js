@@ -4,10 +4,10 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Graph from './Graph.js';
+import Graph from './components/Graph.js';
 import { useState } from "react";
 import Navbar from 'react-bootstrap/Navbar';
-import InputForm from './InputForm';
+import { InputForm, GraphSelect } from './components/InputForm';
 
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
           <Col xs={6}>
             <h1> Graph </h1>
             <Graph data={data} />
+            <GraphSelect />
           </Col>
           <Col>
             <h1> Outputs </h1>

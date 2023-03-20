@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-function InputForm(props) {
+export function InputForm(props) {
     return (
         <Form onSubmit={e => {
             e.preventDefault();
@@ -92,4 +92,11 @@ function AntennaSelect(props) {
     )
 }
 
-export default InputForm;
+export function GraphSelect(props) {
+    return (
+        <Form>
+            <Form.Check inline label="3D Layout" />
+        </Form>
+    )
+}
+
