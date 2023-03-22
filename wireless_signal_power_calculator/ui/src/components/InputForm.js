@@ -44,7 +44,7 @@ export function InputForm(props) {
                     Power
                 </Form.Label>
                 <Col xs={5}>
-                    <Form.Control column xs={6} type="number" placeholder="Power" name="transmitter_power" />
+                    <Form.Control column xs={6} type="number" step="any" placeholder="Power" name="transmitter_power" />
                 </Col>
                 <Col xs={1} className="p-1">
                     <span>W</span>
@@ -55,7 +55,7 @@ export function InputForm(props) {
                     Distance to Receiver
                 </Form.Label>
                 <Col xs={5}>
-                    <Form.Control type="number" placeholder="Distance" name="main_distance" />
+                    <Form.Control type="number" placeholder="Distance" step="any" name="main_distance" />
                 </Col>
                 <Col xs={1} className="p-1">
                     <span>m</span>
@@ -89,14 +89,6 @@ function AntennaSelect(props) {
         <Form.Control as="select" name={props.name}>
             {options}
         </Form.Control>
-    )
-}
-
-export function GraphSelect(props) {
-    return (
-        <Form>
-            <Form.Check inline label="3D Layout" />
-        </Form>
     )
 }
 

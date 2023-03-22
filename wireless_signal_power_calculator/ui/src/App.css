@@ -32,6 +32,13 @@
   color: white;
 }
 
+#canvas-container{
+  position: relative;
+  height: 60vh;
+  margin:auto;
+  background-color:gray ;
+}
+
 /* .navbar, .btn, .form-check-input:checked{
   background-color: lightskyblue;
   border-color: lightskyblue;

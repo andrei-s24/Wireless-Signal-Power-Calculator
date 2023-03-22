@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Graph from './components/Graph.js';
 import { useState } from "react";
 import Navbar from 'react-bootstrap/Navbar';
-import { InputForm, GraphSelect } from './components/InputForm';
+import { InputForm } from './components/InputForm';
 
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
           <Col xs={6}>
             <h1> Graph </h1>
             <Graph data={data} />
-            <GraphSelect />
+            
           </Col>
           <Col>
             <h1> Outputs </h1>
