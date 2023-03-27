@@ -31,7 +31,7 @@ function Graph(props) {
 
     return (
         <div>
-            <Display modelOn={modelOn} data={props.data} />
+            <Display modelOn={modelOn} data={props.data} distance={props.distance}/>
             <Form>
                 <Form.Check inline label="3D Layout" onChange={e => setModelOn(e.target.checked)} />
             </Form>
@@ -41,24 +41,26 @@ function Graph(props) {
 }
 
 function Model(props) {
+    console.log(props.distance);
     return (
         <div id="canvas-container">
             <Canvas>
                 <OrbitControls />
                 <gridHelper />
-                <Cylinder />
+                <Antenna />
+                <Antenna xOffset={props.distance}/>
             </Canvas>
         </div>
     )
 }
 
-function Cylinder() {
+function Antenna(props) {
     const myref = useRef();
-
+    const {xOffset = 0} = props;
     return (
-        <mesh ref={myref} position={[0, 0.5, 0]} scale={[0.1, 1, 0.1]}>
+        <mesh ref={myref} position={[xOffset, 0.5, 0]} scale={[0.1, 1, 0.1]}>
             <cylinderBufferGeometry attach="geometry"  />
-            <meshBasicMaterial attach="material" color="green" />
+            <meshBasicMaterial attach="material" color="white" />
         </mesh>
     );
 }
@@ -102,7 +104,7 @@ function Display(props) {
     }
     else {
         return (
-            <Model />
+            <Model distance={props.distance}/>
         )
     }
 

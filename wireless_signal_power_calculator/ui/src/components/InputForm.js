@@ -55,7 +55,7 @@ export function InputForm(props) {
                     Distance to Receiver
                 </Form.Label>
                 <Col xs={5}>
-                    <Form.Control type="number" placeholder="Distance" step="any" name="main_distance" />
+                    <Form.Control type="number" placeholder="Distance" step="any" name="main_distance" onChange={e => {props.setDistance(e.target.value)}}/>
                 </Col>
                 <Col xs={1} className="p-1">
                     <span>m</span>

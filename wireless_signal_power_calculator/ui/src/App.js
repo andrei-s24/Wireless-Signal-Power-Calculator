@@ -12,20 +12,21 @@ import { InputForm } from './components/InputForm';
 
 function App() {
   const [data, setData] = useState({});
+  const [distance, setDistance] = useState(1);
   return (
     <div className="App">
       <Navbar expand="lg">
-        <Navbar.Brand href="#home">RF Calculator</Navbar.Brand>
+        {/* <Navbar.Brand href="#home">RF Calculator</Navbar.Brand> */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
       </Navbar>
       <Container fluid className="mt-3">
         <Row>
           <Col>
-            <InputForm setData={setData} />
+            <InputForm setData={setData} setDistance={setDistance}/>
           </Col>
           <Col xs={6}>
             <h1> Graph </h1>
-            <Graph data={data} />
+            <Graph data={data} distance={distance}/>
             
           </Col>
           <Col>
