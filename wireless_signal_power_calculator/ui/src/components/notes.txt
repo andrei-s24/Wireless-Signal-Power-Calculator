@@ -1,0 +1,5 @@
+# Make Inputs scrollable
+# Adding more interferers
+# Make Inputs affect API call
+# Make distance calculation in Django app 
+# Make coordinates linked with 3D model 

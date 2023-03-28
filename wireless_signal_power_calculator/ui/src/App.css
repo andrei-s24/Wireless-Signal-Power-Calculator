@@ -32,6 +32,18 @@
   color: white;
 }
 
+.transmitter {
+  background-color: rgb(128, 128, 255) !important;
+}
+
+.receiver {
+  background-color: rgb(128, 255, 128) !important;
+}
+
+.card[class*="interferer"] {
+  background-color: rgb(255, 128, 128);
+}
+
 #canvas-container{
   position: relative;
   height: 60vh;
