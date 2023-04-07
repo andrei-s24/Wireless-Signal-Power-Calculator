@@ -34,7 +34,7 @@ export function AntennaInput(props) {
                     Position
                 </Form.Label>
                 <Col xs={9}>
-                    <CoordinateField name={props.name} />
+                    <CoordinateField name={props.name} position={props.position} index={props.index} update={props.update} interferers={props.interferers} />
                 </Col>
             </Form.Group>
         </Card>
@@ -60,13 +60,53 @@ function CoordinateField(props) {
     return (
         <Row>
             <Col xs={4} className="p-1">
-                <Form.Control type="number" placeholder="x" step="any" name={props.name + "_position_x"} />
+                <Form.Control type="number" label="x" step="any" name={props.name + "_position_x"} defaultValue={props.position[0]} onChange={e => {
+                    if (props.name === "receiver" || props.name === "transmitter") {
+                        let newArr = [...props.position];
+                        let value = (e.target.value !== "" ? parseFloat(e.target.value) : 0);
+                        newArr[0] = value;
+                        props.update(newArr);
+                    }
+                    else {
+                        let newArr = [...props.interferers];
+                        let value = (e.target.value !== "" ? parseFloat(e.target.value) : 0);
+                        newArr[props.index][0] = value;
+                        props.update(newArr);
+                    }
+                }}
+                />
             </Col>
             <Col xs={4} className="p-1">
-                <Form.Control type="number" placeholder="y" step="any" name={props.name + "_position_y"} />
+                <Form.Control type="number" label="y" step="any" name={props.name + "_position_y"} defaultValue={props.position[1]} onChange={e => {
+                    if (props.name === "receiver" || props.name === "transmitter") {
+                        let newArr = [...props.position];
+                        let value = (e.target.value !== "" ? parseFloat(e.target.value) : 0);
+                        newArr[1] = value;
+                        props.update(newArr);
+                    }
+                    else {
+                        let newArr = [...props.interferers];
+                        let value = (e.target.value !== "" ? parseFloat(e.target.value) : 0);
+                        newArr[props.index][1] = value;
+                        props.update(newArr);
+                    }
+                }} />
             </Col>
             <Col xs={4} className="p-1">
-                <Form.Control type="number" placeholder="z" step="any" name={props.name + "_position_z"} />
+                <Form.Control type="number" label="z" step="any" name={props.name + "_position_z"} defaultValue={props.position[2]} onChange={e => {
+                    if (props.name === "receiver" || props.name === "transmitter") {
+                        let newArr = [...props.position];
+                        let value = (e.target.value !== "" ? parseFloat(e.target.value) : 0);
+                        newArr[2] = value;
+                        props.update(newArr);
+                    }
+                    else {
+                        let newArr = [...props.interferers];
+                        let value = (e.target.value !== "" ? parseFloat(e.target.value) : 0);
+                        newArr[props.index][2] = value;
+                        props.update(newArr);
+                    }
+                }} />
             </Col>
         </Row>
     )

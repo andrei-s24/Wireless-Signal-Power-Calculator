@@ -13,6 +13,10 @@ import { InputForm } from './components/InputForm';
 function App() {
   const [data, setData] = useState({});
   const [distance, setDistance] = useState(1);
+  const [interferers, setInterferers] = useState([]);
+  const [transmitter, setTransmitter] = useState([0, 0.5, 0]);
+  const [receiver, setReceiver] = useState([1, 0.5, 0]);
+
   return (
     <div className="App">
       <Navbar expand="lg">
@@ -22,11 +26,11 @@ function App() {
       <Container fluid className="mt-3">
         <Row>
           <Col>
-            <InputForm setData={setData} setDistance={setDistance}/>
+            <InputForm setData={setData} interferers={interferers} setInterferers={setInterferers} transmitter={transmitter} setTransmitter={setTransmitter} receiver={receiver} setReceiver={setReceiver} />
           </Col>
           <Col xs={6}>
             <h1> Graph </h1>
-            <Graph data={data} distance={distance}/>
+            <Graph data={data} transmitter={transmitter} receiver={receiver} />
             
           </Col>
           <Col>

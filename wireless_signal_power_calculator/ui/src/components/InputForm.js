@@ -5,6 +5,24 @@ import Col from 'react-bootstrap/Col';
 import { AntennaInput } from './AntennaInput';
 
 export function InputForm(props) {
+    function addInterferer() {
+        props.setInterferers([...props.interferers, [0, 0.5, 1]]);
+    }
+
+    const updateInterferer = (index, secondIndex) => e => {
+        let newArr = [...props.interferers];
+        let value = (e.target.value !== "" ? parseFloat(e.target.value) : 0);
+        newArr[index][secondIndex] = value;
+        props.setInterferers(newArr);
+    }
+
+    let interferers = [];
+    for (let i = 0; i < props.interferers.length; i++) {
+        interferers.push(
+            <AntennaInput name={"interferer" + (i + 1)} position={props.interferers[i]} index={i} update={props.setInterferers} interferers={props.interferers} />
+        )
+    }     
+
     return (
         <Form onSubmit={e => {
             e.preventDefault();
@@ -28,12 +46,22 @@ export function InputForm(props) {
                     console.error('Error:', error)
                 });
         }}>
-            {/* CSRF Token not working */}
             <h1> Inputs </h1>
-            <AntennaInput name="transmitter" />
-            <AntennaInput name="receiver" />
-            <AntennaInput name="interferer" />
-            <Button type="submit" className="custom-btn">Submit</Button>
+            <AntennaInput name="transmitter" position={props.transmitter} update={props.setTransmitter} />
+            <AntennaInput name="receiver" position={props.receiver} update={props.setReceiver}/>
+            <Row className="mt-2 mb-2">
+                <Col xs={10}>
+                    <div class="scrollable">
+                        {interferers}
+                    </div>
+                </Col>
+                <Col xs={2}>
+                    <Button type="button" className="mt-2" onClick={addInterferer}>+</Button>
+                </Col>
+            </Row>
+            <Button type="submit" className="submit-btn">Submit</Button>
         </Form>
     )
 }
+
+

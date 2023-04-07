@@ -51,16 +51,6 @@
   background-color:gray ;
 }
 
-/* .navbar, .btn, .form-check-input:checked{
-  background-color: lightskyblue;
-  border-color: lightskyblue;
-}
-
-.btn-check:focus+.btn-primary, .btn-primary:focus, .btn-primary:hover{
-  background-color: rgb(68, 182, 253);
-  border-color: lightskyblue;
-} */
-
 .App-link {
   color: #61dafb;
 }
