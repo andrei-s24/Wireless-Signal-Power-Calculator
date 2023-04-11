@@ -9,17 +9,10 @@ export function InputForm(props) {
         props.setInterferers([...props.interferers, [0, 0.5, 1]]);
     }
 
-    const updateInterferer = (index, secondIndex) => e => {
-        let newArr = [...props.interferers];
-        let value = (e.target.value !== "" ? parseFloat(e.target.value) : 0);
-        newArr[index][secondIndex] = value;
-        props.setInterferers(newArr);
-    }
-
     let interferers = [];
     for (let i = 0; i < props.interferers.length; i++) {
         interferers.push(
-            <AntennaInput name={"interferer" + (i + 1)} position={props.interferers[i]} index={i} update={props.setInterferers} interferers={props.interferers} />
+            <AntennaInput name={"interferer" + (i + 1)} position={props.interferers[i]} index={i} setInterferers={props.setInterferers} interferers={props.interferers} />
         )
     }     
 
@@ -40,13 +33,14 @@ export function InputForm(props) {
                 headers: { "X-CSRFToken": csrftoken }
             }).then(response => response.json())
                 .then(data => {
-                    props.setData(data["array"]);
+                    props.setPower(data["power"]);
+                    props.setSIR(data["signal_to_interference_ratio"]);
+                    props.setMaxDistance(data["distance"])
                 })
                 .catch((error) => {
                     console.error('Error:', error)
                 });
         }}>
-            <h1> Inputs </h1>
             <AntennaInput name="transmitter" position={props.transmitter} update={props.setTransmitter} />
             <AntennaInput name="receiver" position={props.receiver} update={props.setReceiver}/>
             <Row className="mt-2 mb-2">

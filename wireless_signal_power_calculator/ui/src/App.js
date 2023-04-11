@@ -5,17 +5,22 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Graph from './components/Graph.js';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from 'react-bootstrap/Navbar';
 import { InputForm } from './components/InputForm';
 
 
 function App() {
-  const [data, setData] = useState({});
-  const [distance, setDistance] = useState(1);
+  const [power, setPower] = useState({});
+  const [SIR, setSIR] = useState({});
   const [interferers, setInterferers] = useState([]);
-  const [transmitter, setTransmitter] = useState([0, 0.5, 0]);
-  const [receiver, setReceiver] = useState([1, 0.5, 0]);
+  const [transmitter, setTransmitter] = useState([1, 0.5, 0]);
+  const [receiver, setReceiver] = useState([0, 0.5, 0]);
+  const [maxDistance, setMaxDistance] = useState(0);
+
+  useEffect(() => {
+    console.log(interferers);
+  }, [interferers])
 
   return (
     <div className="App">
@@ -26,15 +31,11 @@ function App() {
       <Container fluid className="mt-3">
         <Row>
           <Col>
-            <InputForm setData={setData} interferers={interferers} setInterferers={setInterferers} transmitter={transmitter} setTransmitter={setTransmitter} receiver={receiver} setReceiver={setReceiver} />
+            <InputForm setPower={setPower} setSIR={setSIR} setMaxDistance={setMaxDistance} interferers={interferers} setInterferers={setInterferers} transmitter={transmitter} setTransmitter={setTransmitter} receiver={receiver} setReceiver={setReceiver} />
           </Col>
-          <Col xs={6}>
-            <h1> Graph </h1>
-            <Graph data={data} transmitter={transmitter} receiver={receiver} />
-            
-          </Col>
-          <Col>
-            <h1> Outputs </h1>
+          <Col xs={9}>
+            <Graph power={power} SIR={SIR} transmitter={transmitter} receiver={receiver} interferers={interferers} maxDistance={maxDistance} />
+
           </Col>
         </Row>
       </Container>

@@ -24,7 +24,8 @@
   color: white;
 }
 
-.navbar, .custom-btn {
+.navbar,
+.custom-btn {
   background-color: #524fff;
 }
 
@@ -44,11 +45,20 @@
   background-color: rgb(255, 128, 128);
 }
 
-#canvas-container{
+#canvas-container {
   position: relative;
   height: 60vh;
-  margin:auto;
-  background-color:gray ;
+  margin: auto;
+  background-color: gray;
+}
+
+.line-graph {
+  height: 60vh;
+}
+
+.scrollable {
+  overflow-y: scroll;
+  height: 30vh;
 }
 
 .App-link {
@@ -59,6 +69,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

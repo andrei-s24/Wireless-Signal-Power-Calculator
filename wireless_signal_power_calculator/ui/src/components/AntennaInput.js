@@ -22,7 +22,7 @@ export function AntennaInput(props) {
                         Power
                     </Form.Label>
                     <Col xs={4}>
-                        <Form.Control type="number" step="any" placeholder="Power" name={props.name + "_power"} />
+                        <Form.Control required type="number" step="any" placeholder="Power" name={props.name + "_power"} />
                     </Col>
                     <Col xs={2} className="p-1">
                         <span>mW</span>
@@ -34,7 +34,7 @@ export function AntennaInput(props) {
                     Position
                 </Form.Label>
                 <Col xs={9}>
-                    <CoordinateField name={props.name} position={props.position} index={props.index} update={props.update} interferers={props.interferers} />
+                    <CoordinateField name={props.name} position={props.position} index={props.index} update={props.update} interferers={props.interferers} setInterferers={props.setInterferers} />
                 </Col>
             </Form.Group>
         </Card>
@@ -60,7 +60,7 @@ function CoordinateField(props) {
     return (
         <Row>
             <Col xs={4} className="p-1">
-                <Form.Control type="number" label="x" step="any" name={props.name + "_position_x"} defaultValue={props.position[0]} onChange={e => {
+                <Form.Control required type="number" label="x" step="any" name={props.name + "_position_x"} defaultValue={props.position[0]} onChange={e => {
                     if (props.name === "receiver" || props.name === "transmitter") {
                         let newArr = [...props.position];
                         let value = (e.target.value !== "" ? parseFloat(e.target.value) : 0);
@@ -71,13 +71,13 @@ function CoordinateField(props) {
                         let newArr = [...props.interferers];
                         let value = (e.target.value !== "" ? parseFloat(e.target.value) : 0);
                         newArr[props.index][0] = value;
-                        props.update(newArr);
+                        props.setInterferers(newArr);
                     }
                 }}
                 />
             </Col>
             <Col xs={4} className="p-1">
-                <Form.Control type="number" label="y" step="any" name={props.name + "_position_y"} defaultValue={props.position[1]} onChange={e => {
+                <Form.Control required type="number" label="y" step="any" name={props.name + "_position_y"} defaultValue={props.position[1]} onChange={e => {
                     if (props.name === "receiver" || props.name === "transmitter") {
                         let newArr = [...props.position];
                         let value = (e.target.value !== "" ? parseFloat(e.target.value) : 0);
@@ -88,12 +88,12 @@ function CoordinateField(props) {
                         let newArr = [...props.interferers];
                         let value = (e.target.value !== "" ? parseFloat(e.target.value) : 0);
                         newArr[props.index][1] = value;
-                        props.update(newArr);
+                        props.setInterferers(newArr);
                     }
                 }} />
             </Col>
             <Col xs={4} className="p-1">
-                <Form.Control type="number" label="z" step="any" name={props.name + "_position_z"} defaultValue={props.position[2]} onChange={e => {
+                <Form.Control required type="number" label="z" step="any" name={props.name + "_position_z"} defaultValue={props.position[2]} onChange={e => {
                     if (props.name === "receiver" || props.name === "transmitter") {
                         let newArr = [...props.position];
                         let value = (e.target.value !== "" ? parseFloat(e.target.value) : 0);
@@ -104,7 +104,7 @@ function CoordinateField(props) {
                         let newArr = [...props.interferers];
                         let value = (e.target.value !== "" ? parseFloat(e.target.value) : 0);
                         newArr[props.index][2] = value;
-                        props.update(newArr);
+                        props.setInterferers(newArr);
                     }
                 }} />
             </Col>
