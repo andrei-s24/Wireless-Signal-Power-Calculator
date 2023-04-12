@@ -14,7 +14,7 @@ export function InputForm(props) {
         interferers.push(
             <AntennaInput name={"interferer" + (i + 1)} position={props.interferers[i]} index={i} setInterferers={props.setInterferers} interferers={props.interferers} />
         )
-    }     
+    }
 
     return (
         <Form onSubmit={e => {
@@ -23,8 +23,8 @@ export function InputForm(props) {
             let dataEntries = data.entries();
             let URL = "calc_api/calc?";
             for (const pair of dataEntries) {
-                let key = pair[0]
-                let value = pair[1]
+                let key = pair[0];
+                let value = pair[1];
                 URL += key + "=" + value + "&";
             }
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -35,14 +35,15 @@ export function InputForm(props) {
                 .then(data => {
                     props.setPower(data["power"]);
                     props.setSIR(data["signal_to_interference_ratio"]);
-                    props.setMaxDistance(data["distance"])
+                    props.setMaxDistance(data["distance"]);
+                    props.setAverageValues([data["avg_power"], data["avg_SIR"]]);
                 })
                 .catch((error) => {
-                    console.error('Error:', error)
+                    console.error('Error:', error);
                 });
         }}>
             <AntennaInput name="transmitter" position={props.transmitter} update={props.setTransmitter} />
-            <AntennaInput name="receiver" position={props.receiver} update={props.setReceiver}/>
+            <AntennaInput name="receiver" position={props.receiver} update={props.setReceiver} />
             <Row className="mt-2 mb-2">
                 <Col xs={10}>
                     <div class="scrollable">

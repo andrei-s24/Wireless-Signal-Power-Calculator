@@ -18,7 +18,7 @@ def get(request):
 def calc(request):
     transmitter = Antenna.objects.get(name=request.GET.get('transmitter'))
     receiver = Antenna.objects.get(name=request.GET.get('receiver'))
-    transmitter_power = float(request.GET.get('transmitter_power'))**-3
+    transmitter_power = float(request.GET.get('transmitter_power'))*10**-3
     transmitter_position = [float(request.GET.get('transmitter_position_x')),
                             float(request.GET.get('transmitter_position_y')),
                             float(request.GET.get('transmitter_position_z'))]
@@ -34,7 +34,7 @@ def calc(request):
         profile = Antenna.objects.get(
             name=request.GET.get('interferer' + str(i))).profile
         interferer = AntennaObj(
-            position, profile, float(request.GET.get('interferer' + str(i) + '_power'))**-3)
+            position, profile, float(request.GET.get('interferer' + str(i) + '_power'))*10**-3)
         interferers.append(interferer)
         i += 1
     output = calculate_antenna_parameters(
