@@ -58,5 +58,3 @@ export function InputForm(props) {
         </Form>
     )
 }
-
-

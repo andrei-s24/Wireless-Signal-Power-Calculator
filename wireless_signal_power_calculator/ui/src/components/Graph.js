@@ -104,7 +104,7 @@ function Graph(props) {
                     <Model transmitter={props.transmitter} receiver={props.receiver} interferers={props.interferers} maxDistance={props.maxDistance} showRange={showRange} />
                 </Row>
                 <Row className="mt-3">
-                    <Form.Check inline label="Show receiver range under interference" type='checkbox' checked={showRange} onChange={e => { setShowRange(e.target.value); }} />
+                    <Form.Check inline label="Show receiver range under interference" type='checkbox' checked={showRange} onChange={e => { setShowRange(e.target.checked); }} />
                 </Row>
             </Col>
             <Col xs={6}>

@@ -117,4 +117,8 @@ def average_of_dict(dictionary: dict()):
             sum += value
             amt += 1
     
+<<<<<<< HEAD
     return sum / amt
+=======
+    return sum / amt
+>>>>>>> 86bf390

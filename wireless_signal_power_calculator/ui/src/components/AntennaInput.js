@@ -1,5 +1,5 @@
-import { Form, Button, Popover, OverlayTrigger, Tooltip, Row, Col, Card } from 'react-bootstrap';
-import React, { useState, useRef } from 'react';
+import { Form, Button, OverlayTrigger, Tooltip, Row, Col, Card } from 'react-bootstrap';
+import React, { useState } from 'react';
 
 export function AntennaInput(props) {
     const [power, setPower] = useState(0);
@@ -19,9 +19,8 @@ export function AntennaInput(props) {
         interferersCopy.splice(props.index, 1);
         props.setInterferers(interferersCopy);
     }
-
     return (
-        <Card className={props.name + "p-3 mt-2"} >
+        <Card className={props.name + " p-3 mt-2"} >
             <Row>
                 <Col xs={10} className="mb-3">
                     <h2> {props.name.charAt(0).toUpperCase() + props.name.slice(1)} </h2>
