@@ -45,7 +45,7 @@ function Graph(props) {
     console.log(showRange);
     let label = "";
     let unit = "";
-    if (props.mode == 0) {
+    if (mode == 0) {
         label = "Power";
         unit = "(dBm)"
     }
