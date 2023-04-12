@@ -12,6 +12,7 @@ class AntennaObj:
 
 def friis_transmission_formula(transmitter_power, transmitter_gain, receiver_gain, frequency, distance):
     speed_of_light = 2e8
+    # print(transmitter_power, transmitter_gain, receiver_gain)
     receiver_power = transmitter_power * transmitter_gain * receiver_gain * \
         speed_of_light / (4 * math.pi * 2 * distance * frequency*10**-6)**2
     if receiver_power == 0:
@@ -47,11 +48,7 @@ def friis_transmission_formula_per_channel(transmitters: list[AntennaObj], recei
 def signal_to_interference_ratio_per_channel(signal: dict(), interference: dict()):
     result = dict()
     for key, signal_value, interference_value in zip(signal.keys(), signal.values(), interference.values()):
-        # print(signal_value)
-        if interference_value != 0:
-            result[key] = signal_value / interference_value
-        else:
-            result[key] = None
+        result[key] = signal_value - interference_value   
     return result
 
 
@@ -80,18 +77,17 @@ def calculate_antenna_parameters(transmitter, receiver, transmitter_power, trans
     return {
         "power": receiver_power,
         "signal_to_interference_ratio": signal_to_interference_ratio,
-        "distance": distance
+        "distance": distance,
+        "avg_power": average_of_dict(receiver_power),
+        "avg_SIR": average_of_dict(signal_to_interference_ratio)
     }
 
 
-def calculate_sir(transmitter_power, transmitter_gain, receiver_gain, frequency, distance, interference):
+def calculate_SIR(transmitter_power, transmitter_gain, receiver_gain, frequency, distance, interference):
     received_power = friis_transmission_formula(
         transmitter_power, transmitter_gain, receiver_gain, frequency, distance)
-    if interference != 0:
-        sir = received_power / interference
-    else:
-        sir = None
-    return sir
+    SIR = received_power - interference
+    return SIR
 
 
 def calculate_distance(transmitter, receiver, interference):
@@ -99,15 +95,26 @@ def calculate_distance(transmitter, receiver, interference):
     distance = 0.1
 
     while True:
-        print(distance)
-        sir_values = []
+        SIR_values = []
         for frequency, gain in receiver.profile.items():
-            sir = calculate_sir(transmitter.power, transmitter.profile[frequency], gain, float(frequency), distance, interference[frequency])
-            sir_values.append(sir)
-        min_sir = np.min(sir_values)
-        if min_sir <= 1:
+            SIR = calculate_SIR(transmitter.power, transmitter.profile[frequency], gain, float(frequency), distance, interference[frequency])
+            SIR_values.append(SIR)
+        min_SIR = np.min(SIR_values)
+        if min_SIR < 3:
             break
 
         distance += 0.1
 
     return distance
+
+def average_of_dict(dictionary: dict()):
+    sum = 0
+    amt = 0
+    if dictionary is None:
+        return None
+    for value in dictionary.values():
+        if value is not None:
+            sum += value
+            amt += 1
+    
+    return sum / amt

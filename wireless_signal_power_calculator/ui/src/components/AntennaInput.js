@@ -1,13 +1,36 @@
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
+import { Form, Button, OverlayTrigger, Tooltip, Row, Col, Card } from 'react-bootstrap';
+import React, { useState } from 'react';
 
 export function AntennaInput(props) {
+    const [power, setPower] = useState(0);
+
+    const handlePowerChange = (event) => {
+        setPower(event.target.value);
+    }
+
+    const renderTooltip = (props) => (
+        <Tooltip id="power-warning" {...props}>
+            The power value you entered may be illegal.
+        </Tooltip>
+    );
+
+    function removeInterferer() {
+        const interferersCopy = [...props.interferers];
+        interferersCopy.splice(props.index, 1);
+        props.setInterferers(interferersCopy);
+    }
     return (
         <Card className={props.name + " p-3 mt-2"} >
-            <h2> {props.name.charAt(0).toUpperCase() + props.name.slice(1)} </h2>
+            <Row>
+                <Col xs={10} className="mb-3">
+                    <h2> {props.name.charAt(0).toUpperCase() + props.name.slice(1)} </h2>
+                </Col>
+                {props.name.includes("interferer") ? (
+                    <Col>
+                        <Button type="button" onClick={removeInterferer}>-</Button>
+                    </Col>
+                ) : null}
+            </Row>
             <Form.Group as={Row} className="mb-3" >
                 <Form.Label column xs={6}>
                     Antenna
@@ -22,7 +45,12 @@ export function AntennaInput(props) {
                         Power
                     </Form.Label>
                     <Col xs={4}>
-                        <Form.Control required type="number" step="any" placeholder="Power" name={props.name + "_power"} />
+                        <Form.Control required type="number" step="any" placeholder="Power" name={props.name + "_power"} value={power} onChange={handlePowerChange} />
+                        {props.name === "transmitter" && power > 1000 && (
+                            <OverlayTrigger placement="right" overlay={renderTooltip}>
+                                <span className="info-icon">ℹ️</span>
+                            </OverlayTrigger>
+                        )}
                     </Col>
                     <Col xs={2} className="p-1">
                         <span>mW</span>
