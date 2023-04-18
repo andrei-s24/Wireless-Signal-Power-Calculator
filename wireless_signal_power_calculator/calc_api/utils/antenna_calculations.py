@@ -13,8 +13,8 @@ class AntennaObj:
 def friis_transmission_formula(transmitter_power, transmitter_gain, receiver_gain, frequency, distance):
     speed_of_light = 2e8
     # print(transmitter_power, transmitter_gain, receiver_gain)
-    receiver_power = transmitter_power * transmitter_gain * receiver_gain * \
-        speed_of_light / (4 * math.pi * 2 * distance * frequency*10**-6)**2
+    receiver_power = transmitter_power*10**-3 * transmitter_gain * receiver_gain * \
+        speed_of_light**2 / (4 * math.pi * distance * frequency*10**6)**2
     if receiver_power == 0:
         return 0
     return 10 * math.log10(receiver_power) + 30
@@ -102,7 +102,6 @@ def calculate_distance(transmitter, receiver, interference):
         min_SIR = np.min(SIR_values)
         if min_SIR < 3:
             break
-
         distance += 0.1
 
     return distance

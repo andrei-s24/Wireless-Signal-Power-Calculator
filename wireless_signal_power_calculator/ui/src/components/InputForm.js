@@ -16,32 +16,34 @@ export function InputForm(props) {
         )
     }
 
+    function handleSubmit(e) {
+        e.preventDefault();
+        let data = new FormData(e.target);
+        let dataEntries = data.entries();
+        let URL = "calc_api/calc?";
+        for (const pair of dataEntries) {
+            let key = pair[0];
+            let value = pair[1];
+            URL += key + "=" + value + "&";
+        }
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        fetch(URL, {
+            method: 'GET',
+            headers: { "X-CSRFToken": csrftoken }
+        }).then(response => response.json())
+            .then(data => {
+                props.setPower(data["power"]);
+                props.setSIR(data["signal_to_interference_ratio"]);
+                props.setMaxDistance(data["distance"]);
+                props.setAverageValues([data["avg_power"], data["avg_SIR"]]);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
     return (
-        <Form onSubmit={e => {
-            e.preventDefault();
-            let data = new FormData(e.target);
-            let dataEntries = data.entries();
-            let URL = "calc_api/calc?";
-            for (const pair of dataEntries) {
-                let key = pair[0];
-                let value = pair[1];
-                URL += key + "=" + value + "&";
-            }
-            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-            fetch(URL, {
-                method: 'GET',
-                headers: { "X-CSRFToken": csrftoken }
-            }).then(response => response.json())
-                .then(data => {
-                    props.setPower(data["power"]);
-                    props.setSIR(data["signal_to_interference_ratio"]);
-                    props.setMaxDistance(data["distance"]);
-                    props.setAverageValues([data["avg_power"], data["avg_SIR"]]);
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-        }}>
+        <Form onSubmit={handleSubmit}>
             <AntennaInput name="transmitter" position={props.transmitter} update={props.setTransmitter} />
             <AntennaInput name="receiver" position={props.receiver} update={props.setReceiver} />
             <Row className="mt-2 mb-2">

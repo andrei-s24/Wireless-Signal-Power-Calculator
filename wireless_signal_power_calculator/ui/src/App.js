@@ -19,10 +19,6 @@ function App() {
   const [maxDistance, setMaxDistance] = useState(0);
   const [averageValues, setAverageValues] = useState([]);
 
-  useEffect(() => {
-    console.log(interferers);
-  }, [interferers])
-
   return (
     <div className="App">
       <Navbar expand="lg">
@@ -32,7 +28,8 @@ function App() {
       <Container fluid className="mt-3">
         <Row>
           <Col>
-            <InputForm setPower={setPower} setSIR={setSIR} setMaxDistance={setMaxDistance} interferers={interferers} setInterferers={setInterferers} transmitter={transmitter} setTransmitter={setTransmitter} receiver={receiver} setReceiver={setReceiver} setAverageValues={setAverageValues} />          </Col>
+            <InputForm setPower={setPower} setSIR={setSIR} setMaxDistance={setMaxDistance} interferers={interferers} setInterferers={setInterferers} transmitter={transmitter} setTransmitter={setTransmitter} receiver={receiver} setReceiver={setReceiver} setAverageValues={setAverageValues} />
+          </Col>
           <Col xs={9}>
             <Graph power={power} SIR={SIR} transmitter={transmitter} receiver={receiver} interferers={interferers} maxDistance={maxDistance} averageValues={averageValues} />
           </Col>

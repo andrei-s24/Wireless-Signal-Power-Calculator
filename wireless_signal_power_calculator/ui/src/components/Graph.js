@@ -33,7 +33,6 @@ function Graph(props) {
     const [showRange, setShowRange] = useState(false);
 
     useEffect(() => {
-        console.log(mode);
         if (mode == 0) {
             setOutput(props.power);
         }
@@ -42,7 +41,6 @@ function Graph(props) {
         }
     }, [mode, props.power]);
 
-    console.log(showRange);
     let label = "";
     let unit = "";
     if (mode == 0) {
@@ -145,7 +143,6 @@ function Graph(props) {
 }
 
 function Model(props) {
-    console.log(props.showRange);
     return (
         <div id="canvas-container">
             <Canvas frameloop="demand">
